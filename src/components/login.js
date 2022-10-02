@@ -5,7 +5,7 @@ export const Login = () => {
     <div className=" register ">
       <div className=" wrapper">
       <h1 className=" text-center"> Log in</h1>
-<form className="signup-form">
+<form className="signup-form ">
   <input type="text"   placeholder =" User Name"/>
 
   <input  type="password" placeholder =" Password"/>

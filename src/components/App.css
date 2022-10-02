@@ -100,6 +100,7 @@ margin-left: 100px;
  }
  .product{
   margin :100px;
+
   display: flex;
 
 
@@ -123,9 +124,15 @@ margin-left: 100px;
 .planter{
   border:none;
   
+  
 }
 .planter .active{
   background-color:#666;
+}
+.planter img{
+  height:45px;
+
+  
 }
 .register{
 
@@ -170,10 +177,70 @@ margin-top:50px;
 .forgotPassword {
   cursor: pointer;
   text-decoration: underline;
+}
+.cart-page{
+  width:90%;
+  margin: auto;
+  min-height:50vw
+}
+.title{
+  text-align: center;
+  font-size : 50px;
+}
+.cont-shopping{
+  border: black solid 2px;
+  margin-bottom :40px;
+  border-radius : 0;
+  font-weight: 400;
+  font-size:17px;
+} 
+.cont-shopping:hover{
+background-color:#1abc9c;
+color:white;
+}
+.check-out{
+  border: black solid 2px;
+  margin-bottom :40px;
+  border-radius : 0;
+  font-weight: 400;
+  font-size:17px;
+  background-color:black;
+  color:white ;
+
+} 
+.check-out:hover{
+   background-color:rgba(0, 0, 0, 0.339)
+}
+.shopping-bag{
+  text-decoration: underline;
+  cursor: pointer;
+}
+.product-details{
+  margin-left:25px;
+display : flex;
+flex-direction : column;
+justify-content:space-around;
 
 }
-.login-page{
-  
+.product-hr{
+  background-color:gray;
+  border:none;
+  height:1px
+}
+.checkoutProducts{
+  flex : 3
+}
+.summary{
+  flex : 1 ;
+margin:auto;
+  border :1px solid black;
+  justify-content:center
 
-  
+
+}
+.summary div{
+  margin :20px
+
+
+
 }

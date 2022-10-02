@@ -14,6 +14,7 @@ import Signup from './Signup';
 import Contact from './Contact';
 import About from './about';
 import ProductPage from './ProductPage';
+import Cart from './Cart';
 
 import './App.css';
 
@@ -45,6 +46,9 @@ const router = createBrowserRouter([
   {
     path: "/productPage",
     element: <div><ProductPage /></div>,
+  },  {
+    path: "/Cart",
+    element: <div><Cart /></div>,
   }
 ]);
 

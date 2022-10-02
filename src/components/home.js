@@ -68,7 +68,7 @@ function Home (){
 <div className="card-body">
 <h5 className="card-title">{props.name}</h5>
 <p className="card-text">{props.description}</p>
-<a href="#" className="btn btn-primary">{props.btn}</a>
+<a href="/store" className="btn btn-primary">{props.btn}</a>
 </div> 
    
 </div>))}
