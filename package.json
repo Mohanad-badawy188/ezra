@@ -3,13 +3,26 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@emotion/react": "^11.10.4",
+    "@emotion/styled": "^11.10.4",
     "@iconscout/react-unicons": "^1.1.6",
+    "@mui/icons-material": "^5.10.6",
+    "@mui/material": "^5.10.8",
+    "@redux-devtools/extension": "^3.2.3",
+    "@reduxjs/toolkit": "^1.8.6",
+    "@stripe/react-stripe-js": "^1.12.0",
+    "@stripe/stripe-js": "^1.38.1",
+    "axios": "^1.0.0",
     "bootstrap": "^5.2.1",
     "react": "^18.2.0",
     "react-bootstrap": "^2.5.0",
     "react-dom": "^18.2.0",
+    "react-redux": "^8.0.4",
     "react-router": "^6.4.1",
-    "react-scripts": "^5.0.1"
+    "react-scripts": "^5.0.1",
+    "redux-persist": "^6.0.0",
+    "styled-components": "^5.3.6",
+    "timeago.js": "^4.0.2"
   },
   "scripts": {
     "start": "react-scripts start",
