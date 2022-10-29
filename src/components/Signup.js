@@ -40,7 +40,7 @@ e.preventDefault();
 
 
   }catch{}
-
+location.reload()
 }
 
   

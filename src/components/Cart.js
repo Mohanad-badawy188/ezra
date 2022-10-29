@@ -1,17 +1,25 @@
-import React, { useEffect, useState, useMemo } from "react";
+import React, { useEffect, useState, useMemo,useContext } from "react";
 import axios from "axios";
 import styled from "styled-components";
 import { DeleteOutline } from "@mui/icons-material";
-
+import { UserContext } from "./userContext";
+import { Link } from "react-router-dom";
 const Container = styled.div`
   display: flex;
   justify-content: space-between;
   width: 550px;
+  @media (max-width: 1380px) {
+   display: block;
+   align-items: center;
+   text-align: center;
+   margin-top: 5px;
+  }
 `;
 const DeleteItem = styled.div`
   justify-content: center;
   align-items: center;
   margin: auto 0;
+  margin-top: 20px;
 `;
 const Btn = styled.div`
   cursor: pointer;
@@ -19,7 +27,8 @@ const Btn = styled.div`
 const Cart = () => {
   const TOKEN = JSON.parse(localStorage.getItem("user")).accessToken;
   const userId = JSON.parse(localStorage.getItem("user")).foundUser._id;
-  const [order, setOrder] = useState([]);
+  const {order, setOrder} = useContext(UserContext);
+
   const [isLoading, setIsLoading] = useState(false);
 
   function Product(props) {
@@ -41,7 +50,7 @@ const Cart = () => {
     return (
       <div className=" mt-5 pb-5">
         <div className="d-flex ">
-          <img height="360px" src={props.imgURL} />
+          <img height="220vh" src={props.imgURL} />
           <Container>
             <div className="product-details">
               <h5>Product : {props.name}</h5>
@@ -83,23 +92,49 @@ const Cart = () => {
         console.log(e);
       }
     };
-
     cart();
 
   }, [isLoading]);
+  const handleClick =async()=>{
+    if (totalPrice === 0 ) return 
+    try {
+      const res = await axios({
+        method: "post",
+        url: `http://localhost:5000/api/order`,
+        headers: { token: `Bearer ${TOKEN}` },
+        data : {userId ,products:order , amount:totalPrice}
+      });
+
+
+
+   
+    } catch (e) {
+      console.log(e);
+    }
+    const res= await axios({
+      method: "delete",
+      url: `http://localhost:5000/api/cart`,
+      headers: { token: `Bearer ${TOKEN}` },
+
+    });
+
+location.reload()
+  }
 
   return (
     <div className="cart-page">
       <div className="title">YOUR BAG</div>
       <div className=" d-flex justify-content-between mt-5">
+        <Link to={'/store'}>
         <button className="btn cont-shopping">CONTINUE SHOPPING</button>
+        </Link>
         <div className="d-flex  ">
-          <h5 className="me-5 shopping-bag">YOUR SHOPPING BAG (2)</h5>
+          <h5 className="me-5 shopping-bag">YOUR SHOPPING BAG ({order.length})</h5>
           <h5 className="shopping-bag">YOUR WISHLIST</h5>
         </div>
         <button className="btn check-out">CHECKOUT NOW</button>
       </div>
-      <div className="d-flex">
+      <div className="orders">
         <div className="checkoutProducts">
           {order.map((item) => (
             <Product
@@ -124,18 +159,18 @@ const Cart = () => {
             </div>
             <div className="d-flex justify-content-between mb-3">
               <h5>Estimated Shipping</h5>
-              <h5> $ 5 </h5>
+              <h5> $ {order.length > 0 && 5 }</h5>
             </div>
             <div className="d-flex justify-content-between mb-3">
               <h5>Shipping Discount</h5>
-              <h5>$ -3</h5>
+              <h5>$ {order.length > 0 && -3}</h5>
             </div>
             <div className="d-flex justify-content-between mb-3">
               <h2>Total</h2>
-              <h5> $ {totalPrice + 2} </h5>
+              <h5> $ {order.length > 0 && totalPrice + 2} </h5>
             </div>
 
-            <button className="check-out">CHECKOUT NOW</button>
+            <button className="check-out" onClick={handleClick}>CHECKOUT NOW</button>
           </div>
         </div>
       </div>

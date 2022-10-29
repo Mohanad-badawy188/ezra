@@ -35,6 +35,7 @@ export const Login = () => {
         }catch{}
       
         e.preventDefault();
+        location.reload()
       }
   
     if(!localStorage.getItem('user') || JSON.parse(localStorage.getItem('user')).length === 0){

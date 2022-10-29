@@ -1,18 +1,20 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import * as Unicons from "@iconscout/react-unicons";
 import axios from "axios";
 import { useLocation } from "react-router";
-
-
+import { UserContext } from "./userContext";
 
 const ProductPage = () => {
   const [amount, setAmount] = useState(1);
   const [planter, setPlanter] = useState("burbank");
-  const [planterImg, setPlanterImg] = useState("https://m.media-amazon.com/images/I/71hx0Sm9PML._AC_UL320_.jpg");
+  const [planterImg, setPlanterImg] = useState(
+    "https://m.media-amazon.com/images/I/71hx0Sm9PML._AC_UL320_.jpg"
+  );
   const [product, setProduct] = useState({});
   const location = useLocation();
   const Id = location.pathname.split("/")[2];
   const userId = JSON.parse(localStorage.getItem("user")).foundUser;
+  const { order, setOrder } = useContext(UserContext);
 
   useEffect(() => {
     const findProduct = async () => {
@@ -28,14 +30,19 @@ const ProductPage = () => {
     let planter = event.target.id;
     setPlanter(planter);
 
-    if (planter === "burbank"){
-      setPlanterImg("https://m.media-amazon.com/images/I/71hx0Sm9PML._AC_UL320_.jpg")
-    } else if (planter === "upcycled"){
-      setPlanterImg("https://m.media-amazon.com/images/I/41Q86KNr1FS._AC_UL320_.jpg")
+    if (planter === "burbank") {
+      setPlanterImg(
+        "https://m.media-amazon.com/images/I/71hx0Sm9PML._AC_UL320_.jpg"
+      );
+    } else if (planter === "upcycled") {
+      setPlanterImg(
+        "https://m.media-amazon.com/images/I/41Q86KNr1FS._AC_UL320_.jpg"
+      );
     } else {
-      setPlanterImg("https://m.media-amazon.com/images/I/410N3XWTVEL._AC_UL320_.jpg")
+      setPlanterImg(
+        "https://m.media-amazon.com/images/I/410N3XWTVEL._AC_UL320_.jpg"
+      );
     }
-      
 
     event.preventDefault();
   }
@@ -50,34 +57,45 @@ const ProductPage = () => {
       setAmount(amount - 1);
     }
   };
-  const handleClick= async(e) => {
+
+  const handleClick = async (e) => {
     e.preventDefault();
     const TOKEN = JSON.parse(localStorage.getItem("user")).accessToken;
+    console.log(TOKEN);
 
-try{  const res = await axios({
-    method : "post",
-    url: "http://localhost:5000/api/cart",
-    headers: { token: `Bearer ${TOKEN}` },
+    try {
+      const res = await axios({
+        method: "post",
+        url: "http://localhost:5000/api/cart",
+        headers: { token: `Bearer ${TOKEN}` },
 
-    data:{userId,products:{product,quantity:amount},planter:planterImg}
-    
+        data: {
+          userId,
+          products: { product, quantity: amount },
+          planter: planterImg,
+          planterName: planter,
+        },
+      });
+    } catch (err) {
+      console.log(err);
+    }
 
-  });
+    const fetchUserProduct = async () => {
+      const TOKEN = JSON.parse(localStorage.getItem("user")).accessToken;
+      const userId = JSON.parse(localStorage.getItem("user")).foundUser._id;
+      const res = await axios({
+        method: "get",
+        url: `http://localhost:5000/api/cart/find/${userId}`,
+        headers: { token: `Bearer ${TOKEN}` },
+      });
+      setOrder(res.data);
+    };
 
-
-  console.log(res.data)
-
-}catch(err){console.log(err)}
-  
-
-
-   
-
-  }
- 
+    fetchUserProduct();
+  };
 
   return (
-    <div className=" product">
+    <div className=" product ">
       <div className="size">
         <img src={product.imgURL} />
       </div>
@@ -165,7 +183,10 @@ try{  const res = await axios({
               </div>
 
               <div>
-                <button onClick={handleClick} className="btn  btn-success w-100 m-5 ">
+                <button
+                  onClick={handleClick}
+                  className="btn  btn-success w-100 m-5 "
+                >
                   {" "}
                   Add To Cart
                 </button>

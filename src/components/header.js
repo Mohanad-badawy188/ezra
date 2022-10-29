@@ -1,32 +1,16 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
 import Badge from '@mui/material/Badge';
 import { Link } from "react-router-dom";
 import axios from "axios";
+import { UserContext } from "./userContext";
 
 
 function Header() {
  
-    const user = (JSON.parse(localStorage.getItem('user')));
-    const TOKEN = JSON.parse(localStorage.getItem("user")).accessToken;
-    const userId = JSON.parse(localStorage.getItem("user")).foundUser._id;
-    const [order, setOrder] = useState([]);
+  const user = (JSON.parse(localStorage.getItem('user')));
+    const {order, setOrder} = useContext(UserContext);
 
-     const fetchUserProduct = async () => {
-      const res = await axios({
-        method: "get",
-        url: `http://localhost:5000/api/cart/find/${userId}`,
-        headers: { token: `Bearer ${TOKEN}` },
-      });
-      setOrder(res.data)
-  }
-    useEffect(() => {
-  
-      fetchUserProduct()
-
-
-  
-    }, []);
 
 const handleClick = (e)=>{
   e.preventDefault();
@@ -108,4 +92,5 @@ const handleClick = (e)=>{
   );
 }
 export default Header;
+
 

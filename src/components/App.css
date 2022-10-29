@@ -9,6 +9,7 @@ padding-bottom: 0px;
   margin-bottom: 0;
   font-size: 12px;
   letter-spacing: 5px;
+  width: 100vw;
 
 }
 .navbar-nav  li a:hover {
@@ -97,18 +98,19 @@ margin-left: 100px;
   transform:scale(1.2)
  }
  .product img{ 
-  height: 700px;
-  object-fit: cover
+  height: 30vw;
+
+  
  }
  .product{
   margin :100px;
-
-  display: flex;
-
+height: 66vh;
+display: flex;
+justify-content: space-between;
 
  }
 .product .size{
-  flex: 1;
+
 }
 .price{
   font-size :55px;
@@ -125,6 +127,7 @@ margin-left: 100px;
 }
 .planter{
   border:none;
+  padding: 5px 70px;
   
   
 }
@@ -257,4 +260,34 @@ margin:auto;
 .disabled:disabled{
 background-color: rgb(98, 136, 41);
 cursor: not-allowed;
+}
+.orders{
+  display: flex;
+}
+
+
+@media screen and (max-width: 1380px) {
+ .product{
+display: block;
+justify-content: center;
+align-items: center;
+height: 90vh;
+ }
+ .size {
+  justify-content: center;
+  text-align: center;
+ }
+ .orders{
+  display: block;
+ }
+ .cont-shopping{
+  display: none;
+
+ }
+ .shopping-bag{
+  display: none;
+ }
+ .product-details{
+ 
+ }
 }
