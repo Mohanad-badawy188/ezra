@@ -13,7 +13,6 @@
 // } from "redux-persist";
 // import storage from "redux-persist/lib/storage";
 
-
 // const persistConfig = {
 //   key: "root",
 //   version: 1,
@@ -21,10 +20,6 @@
 // };
 // const rootReducer = combineReducers({user:userReducer , cart : cartReducer})
 // const persistedReducer = persistReducer(persistConfig, rootReducer);
-
-
-
-
 
 // export const store =  configureStore({
 //   reducer: persistedReducer,
@@ -35,5 +30,5 @@
 //       },
 //     }),
 // });
-  
+
 // export let persistor = persistStore(store)

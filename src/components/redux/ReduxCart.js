@@ -1,6 +1,5 @@
 // import { createSlice, configureStore } from '@reduxjs/toolkit';
 
-
 // const cartSlice = createSlice({
 //     name: 'CART',
 //     initialState: {
@@ -10,7 +9,7 @@
 //      planterImg : ""
 //     },  reducers: {
 //         addProduct: (state,action) => {
-       
+
 //           state.products.push(action.payload),
 //           state.totalPrice += action.payload.price*action.payload.amount ,
 //           state.quantity +=1 ,
@@ -19,8 +18,6 @@
 //         }
 //       }
 //     })
-    
-    
+
 //     export const { addProduct } = cartSlice.actions;
 //     export default cartSlice.reducer;
-    

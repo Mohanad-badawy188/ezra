@@ -1,22 +1,19 @@
 import React, { useContext, useEffect, useState } from "react";
-import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
-import Badge from '@mui/material/Badge';
+import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
+import Badge from "@mui/material/Badge";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { UserContext } from "./userContext";
 
-
 function Header() {
- 
-  const user = (JSON.parse(localStorage.getItem('user')));
-    const {order, setOrder} = useContext(UserContext);
+  const user = JSON.parse(localStorage.getItem("user"));
+  const { order, setOrder } = useContext(UserContext);
 
-
-const handleClick = (e)=>{
-  e.preventDefault();
-  localStorage.clear();
-  location.reload();
-}
+  const handleClick = (e) => {
+    e.preventDefault();
+    localStorage.clear();
+    location.reload();
+  };
   return (
     <header>
       <nav className="navbar   navbar-expand-lg ">
@@ -40,14 +37,12 @@ const handleClick = (e)=>{
             data-bs-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent"
             aria-expanded="false"
-            aria-label="Toggle navigation"
-          >
+            aria-label="Toggle navigation">
             <span className="navbar-toggler-icon"></span>
           </button>
           <div
             className="  collapse navbar-collapse"
-            id="navbarSupportedContent"
-          >
+            id="navbarSupportedContent">
             <ul className=" navbar-nav ms-auto mb-2 mb-lg-0 ">
               <li className="ps-3 pe-3 nav-item  removeUnderline nav-link ">
                 <a className="" href="/">
@@ -63,34 +58,44 @@ const handleClick = (e)=>{
               <li className="ps-3 pe-3  removeUnderline nav-link ">
                 <a href="/contact">CONTACT US</a>
               </li>
-              {user ? <li className = "ps-3 pe-3 removeUnderline  nav-link text-white"><a href={"/user/"+user.foundUser._id} > {(user.foundUser.name).toUpperCase()}</a></li>: <li className="ps-3 pe-3  removeUnderline nav-link">
-                <a href="/login">LOGIN</a>
-              </li>  }
-              {user ? <li className="ps-3 pe-3 removeUnderline nav-link">
-                <a href="/login" onClick={handleClick}>LOGOUT</a>
-              </li>:    <li className="ps-3 pe-3 removeUnderline nav-link">
-                <a href="/signup"  >SIGNUP</a>
-              </li>  }
-       
-           
-        { user && <Link to={"/cart"}>
-            
-              <li className="ps-3 pe-3  removeUnderline nav-link">
-                <Badge  badgeContent={order.length}  color="primary"  >
-                <ShoppingCartOutlinedIcon  className="text-white" />
-                </Badge>
-              </li>
-              </Link>
-            }
-          
+              {user ? (
+                <li className="ps-3 pe-3 removeUnderline  nav-link text-white">
+                  <a href={"/user/" + user.foundUser._id}>
+                    {" "}
+                    {user.foundUser.name.toUpperCase()}
+                  </a>
+                </li>
+              ) : (
+                <li className="ps-3 pe-3  removeUnderline nav-link">
+                  <a href="/login">LOGIN</a>
+                </li>
+              )}
+              {user ? (
+                <li className="ps-3 pe-3 removeUnderline nav-link">
+                  <a href="/login" onClick={handleClick}>
+                    LOGOUT
+                  </a>
+                </li>
+              ) : (
+                <li className="ps-3 pe-3 removeUnderline nav-link">
+                  <a href="/signup">SIGNUP</a>
+                </li>
+              )}
+
+              {user && (
+                <Link to={"/cart"}>
+                  <li className="ps-3 pe-3  removeUnderline nav-link">
+                    <Badge badgeContent={order.length} color="primary">
+                      <ShoppingCartOutlinedIcon className="text-white" />
+                    </Badge>
+                  </li>
+                </Link>
+              )}
             </ul>
           </div>
         </div>
-
       </nav>
     </header>
   );
 }
 export default Header;
-
-

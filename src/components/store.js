@@ -2,6 +2,8 @@ import { React, useState, useEffect } from "react";
 import * as Unicons from "@iconscout/react-unicons";
 import { Link, useLocation } from "react-router-dom";
 import Axios from "axios";
+import Header from "./header";
+import Footer from "./footer";
 
 function Store() {
   const location = useLocation();
@@ -32,10 +34,10 @@ function Store() {
     setFilterdProducts(filterdItems);
   }, [product, filter]);
   useEffect(() => {
-    if ((sort === "Newest")) {
-    
-      setFilterdProducts((prev) => [...prev].sort((a, b) =>  new Date(a.createdAt) - new Date(b.createdAt)));
-    
+    if (sort === "Newest") {
+      setFilterdProducts((prev) =>
+        [...prev].sort((a, b) => new Date(a.createdAt) - new Date(b.createdAt))
+      );
     } else if (sort === "price(asc)") {
       setFilterdProducts((prev) => [...prev].sort((a, b) => a.price - b.price));
     } else {
@@ -45,7 +47,8 @@ function Store() {
 
   return (
     <div>
-      <div className="bg-light">
+      <Header />
+      <div className="bg-light page">
         <div className="container">
           <h1 className="text-center pt-5"> plants </h1>
 
@@ -64,8 +67,7 @@ function Store() {
               <select
                 className="m-3"
                 onChange={(e) => setFilter(e.target.value)}
-                name="filter"
-              >
+                name="filter">
                 <option>all</option>
                 <option>low maintenece</option>
                 <option>pet friendly</option>
@@ -117,6 +119,7 @@ function Store() {
           </div>
         </div>
       </div>
+      <Footer />
     </div>
   );
 }

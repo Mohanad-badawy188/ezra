@@ -2,6 +2,8 @@ import React from "react";
 
 import homeCardsItems from "./home-cards-items";
 import { Link } from "react-router-dom";
+import Header from "./header";
+import Footer from "./footer";
 
 function Home() {
   function createCard(card) {
@@ -19,7 +21,7 @@ function Home() {
 
   return (
     <div>
-    
+      <Header />
       <div className="height">
         <div className="background ">
           <div className=" home-heading text-white ">
@@ -34,16 +36,14 @@ function Home() {
             <Link to={"/store"}>
               <button
                 type="button"
-                className="btn btn-success pt-2 pb-2 ps-4 pe-4 mt-4"
-              >
+                className="btn btn-success pt-2 pb-2 ps-4 pe-4 mt-4">
                 {" "}
                 SHOP NOW
               </button>
             </Link>
             <button
               type="button"
-              className="btn btn-success pt-2 pb-2 ps-4 pe-4 mt-4 ms-4"
-            >
+              className="btn btn-success pt-2 pb-2 ps-4 pe-4 mt-4 ms-4">
               Learn More
             </button>
           </div>
@@ -102,8 +102,7 @@ function Home() {
               <img
                 className="card-img-top home-img"
                 src={props.img}
-                alt="card "
-              ></img>
+                alt="card "></img>
               <div className="card-body">
                 <h5 className="card-title">{props.name}</h5>
                 <p className="card-text">{props.description}</p>
@@ -115,6 +114,7 @@ function Home() {
           ))}
         </div>
       </div>
+      <Footer />
     </div>
   );
 }

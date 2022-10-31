@@ -144,7 +144,7 @@ justify-content: space-between;
 
 .register{
 
-  height:50vw;
+  height:85vh;
  
   background-image: linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.5)), url(../pics/homePic.png);
   background-repeat: no-repeat;
@@ -264,7 +264,9 @@ cursor: not-allowed;
 .orders{
   display: flex;
 }
-
+.page{
+  height: 85vh;
+}
 
 @media screen and (max-width: 1380px) {
  .product{
