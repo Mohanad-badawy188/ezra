@@ -103,14 +103,15 @@ margin-left: 100px;
   
  }
  .product{
-  margin :100px;
-height: 66vh;
+  margin :50px;
+  min-height: 85vh;
+
 display: flex;
-justify-content: space-between;
+justify-content: space-between ;
 
  }
 .product .size{
-
+flex: 1;
 }
 .price{
   font-size :55px;
@@ -265,7 +266,7 @@ cursor: not-allowed;
   display: flex;
 }
 .page{
-  height: 85vh;
+  min-height: 85vh;
 }
 
 @media screen and (max-width: 1380px) {
@@ -289,7 +290,5 @@ height: 90vh;
  .shopping-bag{
   display: none;
  }
- .product-details{
- 
- }
+
 }

@@ -4,7 +4,8 @@ import { Link, useLocation } from "react-router-dom";
 import Axios from "axios";
 import Header from "./header";
 import Footer from "./footer";
-
+import PropTypes from "prop-types";
+import StoreProps from "./storeProps";
 function Store() {
   const location = useLocation();
   const cat = location.pathname.split("/")[2];
@@ -49,6 +50,8 @@ function Store() {
     <div>
       <Header />
       <div className="bg-light page">
+        {" "}
+        <div></div>
         <div className="container">
           <h1 className="text-center pt-5"> plants </h1>
 
@@ -78,43 +81,15 @@ function Store() {
           </div>
 
           <div className="d-flex d-block container text-center item">
-            {filterdProducts.map((props) => (
-              <div className="col-4 item" key={props._id}>
-                <div className="card me-5">
-                  <div className="card">
-                    <img
-                      className="circle-img"
-                      src={props.imgURL}
-                      alt="avatar_img"
-                    />
-                    <div className="d-flex icons">
-                      <p>
-                        {" "}
-                        <Unicons.UilShoppingCart
-                          size="50"
-                          className="iconBG"
-                        />{" "}
-                      </p>
-                      <Link to={`/productPage/${props._id}`}>
-                        <p>
-                          {" "}
-                          <Unicons.UilHeart size="50" className="iconBG" />
-                        </p>
-                      </Link>
-                      <p>
-                        {" "}
-                        <Unicons.UilSearch size="50" className="iconBG" />{" "}
-                      </p>
-                    </div>
-                  </div>
-
-                  <div className="card-body removeUnderline">
-                    <h3 className="card-title">{props.name}</h3>
-                    <p className="card-text">{props.description}</p>
-                    <h5> price : $ {props.price}</h5>
-                  </div>
-                </div>
-              </div>
+            {filterdProducts.map((item) => (
+              <StoreProps
+                name={item.name}
+                imgURL={item.imgURL}
+                description={item.description}
+                _id={item._id}
+                price={item.price}
+                key={item._id}
+              />
             ))}
           </div>
         </div>
@@ -123,4 +98,5 @@ function Store() {
     </div>
   );
 }
+
 export default Store;
