@@ -2,12 +2,12 @@ import React, { useContext, useEffect, useState } from "react";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 import Badge from "@mui/material/Badge";
 import { Link } from "react-router-dom";
-import axios from "axios";
-import { UserContext } from "./userContext";
+import { useCart, UserInfo } from "./userContext";
 
 function Header() {
-  const user = JSON.parse(localStorage.getItem("user"));
-  const { order, setOrder } = useContext(UserContext);
+  const user = UserInfo();
+
+  const { order, setOrder } = useCart();
 
   const handleClick = (e) => {
     e.preventDefault();

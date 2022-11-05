@@ -5,8 +5,7 @@ import {
   Route,
   Navigate,
 } from "react-router-dom";
-import Header from "./header";
-import Footer from "./footer";
+
 import Home from "./home";
 import Store from "./store";
 import Login from "./login";

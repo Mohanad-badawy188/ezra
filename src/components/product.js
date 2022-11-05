@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import styled from "styled-components";
 import { DeleteOutline } from "@mui/icons-material";
 import axios from "axios";
-import { UserContext } from "./userContext";
+import { useCart, UserInfo } from "./userContext";
 
 const Container = styled.div`
   display: flex;
@@ -27,9 +27,9 @@ const Btn = styled.div`
 `;
 
 function Product(props) {
-  const { order, setOrder } = useContext(UserContext);
-  const TOKEN = JSON.parse(localStorage.getItem("user")).accessToken;
-  const userId = JSON.parse(localStorage.getItem("user")).foundUser._id;
+  const { order, setOrder } = useCart();
+  const TOKEN = UserInfo().accessToken;
+  const userId = UserInfo().foundUser._id;
   const [isLoading, setIsLoading] = useState(false);
   const handleClick = async () => {
     try {
@@ -45,6 +45,7 @@ function Product(props) {
       console.log(e);
     }
   };
+
   useEffect(() => {
     const cart = async () => {
       try {
@@ -54,13 +55,16 @@ function Product(props) {
           headers: { token: `Bearer ${TOKEN}` },
         });
 
-        setOrder(res.data);
+        if (res.data) {
+          setOrder(res.data);
+        }
       } catch (e) {
         console.log(e);
       }
     };
     cart();
   }, [isLoading]);
+
   return (
     <div className=" mt-5 pb-5">
       <div className="d-flex ">

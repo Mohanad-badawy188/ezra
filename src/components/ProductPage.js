@@ -1,8 +1,8 @@
-import React, { useEffect, useState, useContext } from "react";
+import React, { useEffect, useState } from "react";
 import * as Unicons from "@iconscout/react-unicons";
 import axios from "axios";
 import { useLocation } from "react-router";
-import { UserContext } from "./userContext";
+import { useCart, UserInfo } from "./userContext";
 import Header from "./header";
 import Footer from "./footer";
 
@@ -15,15 +15,17 @@ const ProductPage = () => {
   const [product, setProduct] = useState({});
   const location = useLocation();
   const Id = location.pathname.split("/")[2];
-  const userId = JSON.parse(localStorage.getItem("user")).foundUser;
-  const { order, setOrder } = useContext(UserContext);
+  const userId = UserInfo().foundUser._id;
+  const { order, setOrder } = useCart();
 
   useEffect(() => {
     const findProduct = async () => {
       const res = await axios.get(
         "http://localhost:5000/api/product/find/" + Id
       );
-      setProduct(res.data);
+      if (res.data) {
+        setProduct(res.data);
+      }
     };
     findProduct();
   }, [userId]);
@@ -59,11 +61,9 @@ const ProductPage = () => {
       setAmount(amount - 1);
     }
   };
-
+  const TOKEN = UserInfo().accessToken;
   const handleClick = async (e) => {
     e.preventDefault();
-    const TOKEN = JSON.parse(localStorage.getItem("user")).accessToken;
-    console.log(TOKEN);
 
     try {
       const res = await axios({
@@ -83,14 +83,14 @@ const ProductPage = () => {
     }
 
     const fetchUserProduct = async () => {
-      const TOKEN = JSON.parse(localStorage.getItem("user")).accessToken;
-      const userId = JSON.parse(localStorage.getItem("user")).foundUser._id;
       const res = await axios({
         method: "get",
         url: `http://localhost:5000/api/cart/find/${userId}`,
         headers: { token: `Bearer ${TOKEN}` },
       });
-      setOrder(res.data);
+      if (res.data) {
+        setOrder(res.data);
+      }
     };
 
     fetchUserProduct();

@@ -16,20 +16,18 @@ export const Login = () => {
 
         data: { email, password },
       });
-      setUser(res.data);
-      console.log(res.data);
-    } catch {}
+      if (res.data) {
+        setUser(res.data);
+      }
+    } catch (err) {
+      console.log(err);
+    }
 
     e.preventDefault();
     location.reload();
   };
 
-  if (
-    !localStorage.getItem("user") ||
-    JSON.parse(localStorage.getItem("user")).length === 0
-  ) {
-    localStorage.setItem("user", JSON.stringify(user));
-  }
+  localStorage.setItem("user", JSON.stringify(user));
 
   return (
     <div className="page">

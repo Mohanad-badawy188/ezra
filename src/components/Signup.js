@@ -1,6 +1,4 @@
 import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { signup } from "./redux/apiReq";
 import axios from "axios";
 import Footer from "./footer";
 import Header from "./header";
@@ -21,18 +19,16 @@ const Signup = () => {
 
         data: { name, email, password },
       });
-      setUser(res.data);
-      console.log(res.data);
-    } catch {}
+      if (res.data) {
+        setUser(res.data);
+      }
+    } catch (err) {
+      console.log(err);
+    }
     location.reload();
   };
 
-  if (
-    !localStorage.getItem("user") ||
-    JSON.parse(localStorage.getItem("user")).length === 0
-  ) {
-    localStorage.setItem("user", JSON.stringify(user));
-  }
+  localStorage.setItem("user", JSON.stringify(user));
 
   return (
     <div>

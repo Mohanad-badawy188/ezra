@@ -1,16 +1,15 @@
-import React, { useEffect, useState, useContext } from "react";
+import React from "react";
 import axios from "axios";
-import { UserContext } from "./userContext";
+import { useCart, UserInfo } from "./userContext";
 import { Link } from "react-router-dom";
 import Header from "./header";
 import Footer from "./footer";
 import Product from "./product";
 
 const Cart = () => {
-  const TOKEN = JSON.parse(localStorage.getItem("user")).accessToken;
-  const userId = JSON.parse(localStorage.getItem("user")).foundUser._id;
-  const { order, setOrder } = useContext(UserContext);
-
+  const TOKEN = UserInfo().accessToken;
+  const userId = UserInfo().foundUser.id;
+  const { order, setOrder } = useCart();
   const totalPrice = order.reduce((total, item) => {
     return total + item.products.product.price * item.products.quantity;
   }, 0);

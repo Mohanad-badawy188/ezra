@@ -1,10 +1,8 @@
 import { React, useState, useEffect } from "react";
-import * as Unicons from "@iconscout/react-unicons";
-import { Link, useLocation } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import Axios from "axios";
 import Header from "./header";
 import Footer from "./footer";
-import PropTypes from "prop-types";
 import StoreProps from "./storeProps";
 function Store() {
   const location = useLocation();
@@ -18,8 +16,9 @@ function Store() {
     const getProducts = async () => {
       try {
         const res = await Axios.get("http://localhost:5000/api/product");
-
-        setProduct(res.data);
+        if (res.data) {
+          setProduct(res.data);
+        }
       } catch (err) {
         console.log(err);
       }
