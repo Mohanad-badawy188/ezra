@@ -40,7 +40,7 @@ const Cart = () => {
         let data = {
           auth_token: token,
           delivery_needed: "false",
-          amount_cents: totalPrice * 100 + 200 || 14000,
+          amount_cents: totalPrice || 14000,
           currency: "EGP",
           merchant_order_id: 5,
 
@@ -99,7 +99,7 @@ const Cart = () => {
       const PaymentKey = async (token, id) => {
         let data = {
           auth_token: token,
-          amount_cents: totalPrice * 100 + 200 || 14000,
+          amount_cents: totalPrice  || 14000,
           expiration: 3600,
           order_id: id,
           billing_data: {
